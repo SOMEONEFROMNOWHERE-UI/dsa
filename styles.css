@@ -1,0 +1,496 @@
+/* ═══════════════════════════════════════════════
+   styles.css — IoT Smart Parking System
+   Deep Matte Dark · Editorial Engineering Aesthetic
+═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Design Tokens ────────────────────────────── */
+:root {
+  --bg-base:       #0b0c10;
+  --bg-card:       #12141a;
+  --bg-card-deep:  #0e1016;
+  --bg-code:       #0a0b0f;
+  --border:        #262936;
+  --border-active: #1d4ed8;
+  --blue:          #1d4ed8;
+  --blue-light:    #3b82f6;
+  --blue-glow:     rgba(29, 78, 216, 0.18);
+  --text-primary:  #e8eaf0;
+  --text-secondary:#8b91a8;
+  --text-muted:    #555e7a;
+  --text-accent:   #a5b4fc;
+  --green:         #22c55e;
+  --green-dim:     rgba(34, 197, 94, 0.12);
+  --amber:         #f59e0b;
+  --amber-dim:     rgba(245, 158, 11, 0.10);
+  --red:           #ef4444;
+  --font-serif:    'Playfair Display', Georgia, serif;
+  --font-sans:     'Inter', system-ui, sans-serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
+  --radius-sm:     6px;
+  --radius-md:     10px;
+  --radius-lg:     16px;
+  --radius-pill:   999px;
+  --shadow-card:   0 2px 16px rgba(0,0,0,0.45);
+  --transition:    0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset & Base ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 15px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── App Container ────────────────────────────── */
+#app {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3.5rem;
+}
+
+/* ── Header ───────────────────────────────────── */
+.app-header {
+  margin-bottom: 2rem;
+}
+
+.stage-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.stage-heading {
+  font-family: var(--font-serif);
+  font-size: 2.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+}
+
+/* ── Stage Navigation ─────────────────────────── */
+.stage-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform 0.1s;
+  user-select: none;
+  line-height: 1;
+}
+
+.nav-btn.pill-text { padding: 0.48rem 1.1rem; }
+.nav-btn.pill-num  { width: 36px; height: 36px; }
+
+.nav-btn:hover {
+  background: #1a1d27;
+  border-color: #3d4460;
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.nav-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  box-shadow: 0 0 0 3px var(--blue-glow);
+}
+
+.nav-btn:active { transform: scale(0.97); }
+
+/* ── Contextual Summary ───────────────────────── */
+.stage-summary {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 860px;
+  border-left: 2px solid var(--border-active);
+  padding-left: 1rem;
+  font-style: normal;
+}
+
+/* ── Section Cards ────────────────────────────── */
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-card);
+}
+
+/* ── Architecture Diagram ─────────────────────── */
+.diagram-wrap {
+  position: relative;
+  padding: 1.5rem 1rem 1rem;
+}
+
+.diagram-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 0;
+  position: relative;
+}
+
+/* ── Arch Nodes ───────────────────────────────── */
+.arch-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.85rem 1rem;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: var(--bg-card-deep);
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+  min-width: 150px;
+  margin: 0 auto;
+  z-index: 2;
+  user-select: none;
+}
+
+.arch-node:hover {
+  border-color: #3d4460;
+  background: #13151d;
+  box-shadow: 0 0 0 2px rgba(61,68,96,0.3);
+}
+
+.arch-node.state-active {
+  border-color: var(--border-active);
+  background: #101525;
+  box-shadow: 0 0 0 2px var(--blue-glow), 0 0 20px rgba(29,78,216,0.12);
+}
+
+.arch-node.state-done {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: #0f1812;
+}
+
+.node-title {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.node-line1 {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-accent);
+  font-style: italic;
+  margin-bottom: 0.15rem;
+}
+
+.node-line2 {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+.node-sub {
+  font-family: var(--font-sans);
+  font-size: 0.63rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+/* Status dot on each node */
+.arch-node::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.arch-node.state-active::before {
+  background: var(--blue-light);
+  box-shadow: 0 0 6px var(--blue-light);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+.arch-node.state-done::before {
+  background: var(--green);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 4px var(--blue-light); }
+  50%       { box-shadow: 0 0 10px var(--blue-light); }
+}
+
+/* ── SVG Arrow Canvas ─────────────────────────── */
+#arrow-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* ── Row & Column spacers for grid layout ─────── */
+.diagram-row {
+  display: contents;
+}
+
+/* Node placement helper */
+.node-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.6rem 0.6rem;
+}
+
+/* ── Diagram Legend ───────────────────────────── */
+.diagram-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+.legend-dot.dot-active  { border-color: var(--blue-light); background: rgba(59,130,246,0.25); }
+.legend-dot.dot-memory  { border-color: #888; background: transparent; }
+.legend-dot.dot-compute { border-color: var(--amber); background: var(--amber-dim); }
+
+.legend-hint {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Memory Cards ─────────────────────────────── */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.memory-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.15rem;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition);
+}
+
+.memory-card:hover { border-color: #3d4460; }
+
+.mem-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.mem-main {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-accent);
+  line-height: 1.55;
+  white-space: pre-line;
+  margin-bottom: 0.5rem;
+  min-height: 2.6em;
+}
+
+.mem-sub {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── Struct Inspector ─────────────────────────── */
+.struct-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.struct-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.struct-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+
+.struct-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.struct-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.32rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.struct-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin: 0.7rem 0 1rem;
+}
+
+.code-block {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #c7d0e8;
+  line-height: 1.75;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* C syntax colouring (via span injection in JS) */
+.c-keyword { color: #569cd6; }
+.c-type    { color: #4ec9b0; }
+.c-comment { color: #6a9955; font-style: italic; }
+.c-string  { color: #ce9178; }
+.c-num     { color: #b5cea8; }
+.c-name    { color: #dcdcaa; }
+
+/* ── Arrow / Edge label pill ──────────────────── */
+.edge-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  fill: var(--text-muted);
+}
+
+/* ── Transitions & Animations ─────────────────── */
+.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 860px) {
+  .memory-grid { grid-template-columns: 1fr; }
+  .stage-heading { font-size: 1.55rem; }
+  .diagram-grid { grid-template-columns: 1fr; }
+  .node-cell { padding: 0.8rem 0; }
+}
+
+@media (max-width: 600px) {
+  #app { padding: 1.2rem 1rem 2.5rem; }
+  .stage-heading { font-size: 1.3rem; }
+  .struct-header { flex-direction: column; }
+}
+
+/* ── Scrollbar ────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: #2a2e3e; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3f55; }
+
+/* ── Section separator lines ─────────────────── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
